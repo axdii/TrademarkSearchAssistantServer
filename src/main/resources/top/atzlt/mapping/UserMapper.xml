@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.atzlt.dao.UserDao" >
+
+	<insert id="addUser" parameterType="User" >
+		INSERT INTO t_user(user_id, user_name, user_password, user_real_name,
+							user_phone, user_email, user_address, user_type, user_locked)
+		VALUES(#{userId}, #{userName}, #{userPassword}, #{userRealName}, #{userPhone}, #{userEmail}, #{userAddress}, #{userType}, #{userLocked})
+	</insert>
+
+	<update id="updateUser" parameterType="User">
+		UPDATE t_user u
+	  	SET user_name = #{userName}, user_password = #{userPassword},
+	  		user_real_name = #{userRealName},
+	  		user_email = #{userEmail}, user_address = #{userAddress},
+	  		user_type = #{userType}, user_locked = #{userLocked}
+	  	WHERE user_id = #{userId}
+	</update>
+
+
+	<select id="getAllUser" resultType="User">
+		SELECT
+		  user_id userId,
+		  user_name userName,
+		  user_password userPassword,
+		  user_real_name userRealName,
+		  user_phone userPhone,
+		  user_email userEmail,
+		  user_address userAddress,
+		  user_type userType,
+		  user_locked userLocled
+		FROM t_user
+	</select>
+
+	<select id="getUserById" resultType="User" parameterType="int">
+		SELECT
+		  user_id userId,
+		  user_name userName,
+		  user_password userPassword,
+		  user_real_name userRealName,
+		  user_phone userPhone,
+		  user_email userEmail,
+		  user_address userAddress,
+		  user_type userType,
+		  user_locked userLocled
+		FROM t_user
+		WHERE user_id = #{userId}
+	</select>
+
+	<select id="getUserByPhone" resultType="User">
+		SELECT
+		  user_id userId,
+		  user_name userName,
+		  user_password userPassword,
+		  user_real_name userRealName,
+		  user_phone userPhone,
+		  user_email userEmail,
+		  user_address userAddress,
+		  user_type userType,
+		  user_locked userLocled
+		FROM t_user
+		WHERE user_phone = #{userPhone}
+	</select>
+
+	<select id="isExist" resultType="java.lang.Boolean" parameterType="User">
+		SELECT count(user_id) FROM t_user WHERE user_phone=#{userPhone}
+	</select>
+
+    <select id="getLastUserId" resultType="java.lang.Integer">
+		SELECT MAX(user_id) FROM t_user
+	</select>
+
+</mapper>

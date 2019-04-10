@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+author:     logMath
+date:       2019-3-13
+function:   记录已爬url值，记录至此。
+-->
+<root>
+    <url></url>
+</root>

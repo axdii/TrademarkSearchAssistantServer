@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.atzlt.dao.TrademarkDao" >
+
+    <insert id="addTrademarkListDomain" parameterType="TrademarkListDomain">
+        INSERT INTO t_trademark_list(trademark_id, trademark_name)
+        VALUES(#{trademarkId}, #{trademarkName})
+    </insert>
+
+    <insert id="addTrademarkDomain" parameterType="TrademarkDomain">
+        INSERT INTO t_trademark_info(trademark_id, trademark_name,
+                                      trademark_type, similar_id,
+                                      brief_description, time_of_application,
+                                      registerd_address, petitioner,
+                                      user_time, color,
+                                      shape)
+        VALUES (#{trademarkId}, #{trademarkName},
+                  #{trademarkType}, #{similarId},
+                  #{briefDescription}, #{timeOfApplication},
+                  #{registeredAddress}, #{petitioner},
+                  #{useTime}, #{color},
+                  #{shape})
+    </insert>
+
+    <insert id="addTrademarkTempDomain" parameterType="TrademarkTempDomain">
+        INSERT INTO t_trademark_info(trademark_id, trademark_name,
+                                      trademark_type, similar_id,
+                                      brief_description, time_of_application,
+                                      registerd_address, petitioner,
+                                      user_time, color,
+                                      shape)
+        VALUES (#{trademarkId}, #{trademarkName},
+                  #{trademarkType}, #{similarId},
+                  #{briefDescription}, #{timeOfApplication},
+                  #{registeredAddress}, #{petitioner},
+                  #{useTime}, #{color},
+                  #{shape})
+    </insert>
+
+    <delete id="deleteTrademarkDomainById" parameterType="int">
+        DELETE FROM t_trademark_info WHERE trademark_id = #{trademarkId}
+    </delete>
+
+    <delete id="deleteTrademarkListDomainById" parameterType="int">
+        DELETE FROM t_trademark_list WHERE trademark_id = #{trademarkId}
+    </delete>
+
+
+    <select id="getTrademarkLists" resultType="TrademarkListDomain">
+        SELECT
+          trademark_id trademarkId,
+          trademark_name trademarkName,
+          trademark_type trademarkType
+        FROM t_trademark_info
+    </select>
+
+    <select id="getTrademarkDomain" resultType="TrademarkDomain" parameterType="int">
+        SELECT
+          trademark_id trademarkId,
+          trademark_name trademarkName,
+          trademark_type trademarkType,
+          similar_id similarId,
+          brief_description briefDescription,
+          time_of_application timeOfApplication,
+          registerd_address registeredAddress,
+          petitioner petitioner,
+          user_time useTime,
+          color color,
+          shape shape
+        FROM t_trademark_info
+        WHERE  trademark_id = #{trademarkId}
+    </select>
+    <select id="getLastTrademarkListId" resultType="java.lang.Integer">
+        SELECT MAX(trademark_id) FROM t_trademark_list
+    </select>
+    <select id="getLastTrademarkDomainId" resultType="java.lang.Integer">
+        SELECT MAX(trademark_id) FROM t_trademark_info
+    </select>
+    <select id="getTrademarkDomains" resultType="TrademarkDomain">
+        SELECT
+          trademark_id trademarkId,
+          trademark_name trademarkName,
+          trademark_type trademarkType,
+          similar_id similarId,
+          brief_description briefDescription,
+          time_of_application timeOfApplication,
+          registerd_address registeredAddress,
+          petitioner petitioner,
+          user_time useTime,
+          color color,
+          shape shape
+        FROM t_trademark_info
+    </select>
+</mapper>

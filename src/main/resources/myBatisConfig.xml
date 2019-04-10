@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="User" type="top.atzlt.domain.User"/>
+		<typeAlias alias="TrademarkDomain" type="top.atzlt.domain.TrademarkDomain"/>
+		<typeAlias alias="TrademarkListDomain" type="top.atzlt.domain.TrademarkListDomain"/>
+		<typeAlias alias="TrademarkTempDomain" type="top.atzlt.domain.TrademarkTempDomain"/>
+	</typeAliases>
+</configuration>

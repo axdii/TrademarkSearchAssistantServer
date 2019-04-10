@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+author:     logMath
+date:       2019-3-13
+function:   计算已爬url的md5值，记录至此。进行url过滤时，使用hash计算快速查重。
+-->
+<root>
+    <md></md>
+</root>

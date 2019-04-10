@@ -1,0 +1,21 @@
+<!--
+author:     logMath
+date:       2019-3-13
+function:   文件说明
+-->
+
+此文件夹filterurl现今存放3个文件：
+found.fd:
+以文本方式记录url
+
+foundmd5xml:
+将url计算hash值并储存至xml文件
+
+foundxml:
+将url值储存至xml文件
+
+
+tips：
+针对此网站新闻网页url具有一定规律，每个页面url以http://news.gbicom.cn/wz/为始
+文件名为new+序列号（如：new117550.html
+新文章序列号是在现有最大序列号加1（即递增，但是据了解，此网站的起始2000个new页面是基本内容无用的）
