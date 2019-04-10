@@ -1,0 +1,2 @@
+# TrademarkSearchAssistantServer
+基于语音识别人机互动的商标查询助手
