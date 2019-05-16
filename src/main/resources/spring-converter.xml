@@ -13,10 +13,40 @@
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置, 测试时用，之后弃用-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:order="1"
+          p:order="2"
           p:exposeContextBeansAsAttributes="true"
           p:prefix="/WEB-INF/views/"
           p:suffix=".jsp"/>
+
+    <!--    定义FreeMarker视图解析器-->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+          p:order="1"
+          p:exposeContextBeansAsAttributes="true"
+          p:suffix=".ftl"
+          p:contentType="text/html;charset=utf-8"
+          p:viewClass="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+
+    <!-- freemarker的配置 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+          p:templateLoaderPath="/WEB-INF/views/">
+
+        <property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
+            <props>
+                <prop key="template_update_delay">5</prop><!--刷新模板的周期，单位为秒 -->
+                <prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
+                <prop key="locale">UTF-8</prop><!-- 本地化设置 -->
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">0.####</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+            </props>
+        </property>
+
+
+    </bean>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 , 测试时候用，之后弃用-->
     <bean id="mappingJackson2HttpMessageConverter"

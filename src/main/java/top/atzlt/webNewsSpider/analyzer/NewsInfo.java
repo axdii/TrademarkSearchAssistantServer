@@ -61,6 +61,7 @@ public class NewsInfo {
         this.introduce = introduce;
     }
 
+    //在这里把爬进来的新闻的标题存入redis中
     public void write() {
         try {
             System.out.println("");
@@ -94,6 +95,8 @@ public class NewsInfo {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(content)));
             writer.write(contentstab);
             writer.close();
+
+            //###TODO 在这里将名称或id存入Redis
         } catch (IOException e) {
             e.printStackTrace();
         }

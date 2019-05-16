@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+    <!--   1.配置连接池信息
+        maxTotal：最大连接数
+        maxIdle：最大空闲数
+        maxWaitMillis：最大等待时间
+        blockWhenExhausted：连接超时时是否阻塞，false时报异常,ture阻塞直到超时, 默认true
+        testOnBorrow：返回连接时，检测连接是否成功
+    -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxTotal="${redis.maxTotal}"
+          p:maxIdle="${redis.maxIdle}"
+          p:maxWaitMillis="${redis.maxWaitMillis}"
+          p:blockWhenExhausted="${redis.blockWhenExhausted}"
+          p:testOnBorrow="${redis.testOnBorrow}"/>
+
+    <!-- Spring整合Jedis（Redis）
+        hostName：主机地址
+        port：端口号
+        password：认证密码
+        poolConfig：连接池
+     -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="${redis.host}"
+          p:port="${redis.port}"
+          p:password="${redis.password}"
+          p:poolConfig-ref="jedisPoolConfig"
+          p:usePool="true"/>
+
+    <!--    RedisTemplate
+        key进行序列化设置，由原有的JDKXX序列化改为String
+        但是可以将value设置为默认的JDK，这样会比较安全
+        开启事务：enableTransactionSupport设置为true
+    -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connectionFactory-ref="jedisConnectionFactory"
+          p:enableTransactionSupport="true">
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+
+
+</beans>

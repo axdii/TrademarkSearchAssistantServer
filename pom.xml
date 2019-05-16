@@ -327,6 +327,28 @@
             <version>0.7.3</version>
         </dependency>
 
+<!--        redis客户端-->
+        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.1.7.RELEASE</version>
+        </dependency>
+
+<!--        freemarker一种基于java的网页模板-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -373,7 +395,7 @@
 
     <properties>
         <file.encoding>UTF-8</file.encoding>
-        <spring.version>5.0.7.RELEASE</spring.version>
+        <spring.version>5.1.7.RELEASE</spring.version>
         <slf4j.version>1.7.25</slf4j.version>
         <aspectj.version>1.9.1</aspectj.version>
         <aopalliance.version>1.0</aopalliance.version>

@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h2>简易后台</h2>
+    <h2>简易后台:JSP</h2>
     <a href="http://atzlt.top:8080/trademark/dataManagement/addTrademarkDomain.do">添加商标信息</a><br>
     <a href="http://atzlt.top:8080/trademark/dataManagement/showTrademarkDomains.do">查看所有商标信息</a><br>
     <a href="http://atzlt.top:8080/trademark/segTest.do">分词测试</a>

@@ -3,12 +3,17 @@ package top.atzlt.service.Impl;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import top.atzlt.cons.CommonConstant;
 import top.atzlt.domain.NewsDomain;
 import top.atzlt.service.NewsPickerService;
 import top.atzlt.web.DirManager;
 
+import javax.annotation.Resource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -24,6 +29,27 @@ public class NewsPickerServiceImpl implements NewsPickerService {
 
     private static final String WINDOWS_DELIMITER = "\\";//delimiter
     private static final String LINUX_DELIMITER = "/";
+
+    //####TODO 为新闻添加一个缓存
+
+    private RedisTemplate<String, String> redisTemplate;
+    private HashOperations<String, String, NewsDomain.News> hash;
+    private ValueOperations<String, String> string;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate<String, String> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    @Resource(name = "redisTemplate")
+    public void setHash(HashOperations<String, String, NewsDomain.News> hash) {
+        this.hash = hash;
+    }
+
+    @Resource(name = "redisTemplate")
+    public void setString(ValueOperations<String, String> string) {
+        this.string = string;
+    }
 
     @Override
     public List<Integer> getAllNewsId() {

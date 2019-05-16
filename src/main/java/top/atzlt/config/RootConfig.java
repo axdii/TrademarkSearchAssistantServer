@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ImportResource(locations = {"classpath:spring-mybatis.xml", "classpath:spring-converter.xml"})
+@ImportResource(locations = {"classpath:spring-mybatis.xml", "classpath:spring-converter.xml", "classpath:spring-redis.xml"})
 @ComponentScan(basePackages = {"top.atzlt"},
         excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)})
 public class RootConfig {
